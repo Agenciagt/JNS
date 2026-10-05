@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronograma de Contenidos | Different Beauty Saloon</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#FAF6E8',
+                            100: '#F3E8C4',
+                            200: '#E6D28C',
+                            300: '#D9BC54',
+                            400: '#CCA625',
+                            500: '#B8860B',
+                            600: '#996B07',
+                            700: '#754F04',
+                            800: '#523602',
+                            900: '#332000',
+                            accent: '#D4AF37',
+                            light: '#F4E8C1',
+                            gradient: 'linear-gradient(135deg, #D4AF37 0%, #F3E8C4 50%, #B8860B 100%)'
+                        },
+                        beige: {
+                            50: '#FDFBF7',
+                            100: '#F7F2E8',
+                            200: '#EFE6D5',
+                            300: '#E2D4BD',
+                            400: '#D1BC9D',
+                            500: '#BCA17C',
+                            600: '#9E835E',
+                            700: '#7A6445',
+                            800: '#54442E',
+                            900: '#33281A'
+                        },
+                        espresso: {
+                            50: '#F6F3F1',
+                            100: '#E9E2DD',
+                            200: '#D0C2B8',
+                            300: '#AF9A8B',
+                            400: '#876D5B',
+                            500: '#5C3A21',
+                            600: '#4A2D19',
+                            700: '#3A2111',
+                            800: '#2A170B',
+                            900: '#1A0D05'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #2A170B;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-serif-title {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Gold Gradient Card Accent */
+        .gold-border-top {
+            border-top: 3px solid #D4AF37;
+        }
+
+        .gold-glow {
+            box-shadow: 0 4px 20px -2px rgba(212, 175, 55, 0.25);
+        }
+
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #3A2111 0%, #2A170B 100%);
+        }
+
+        .gold-badge {
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+            color: #FFFFFF;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F7F2E8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #BCA17C;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            .print-full-width { width: 100% !important; max-width: none !important; }
+            body { background: white; color: black; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen selection:bg-gold-200 selection:text-espresso-900">
+    <div id="app" class="pb-16">
+
+        <!-- Top Announcement Bar / Monday Shooting Alert -->
+        <div class="bg-espresso-900 text-gold-200 text-xs sm:text-sm py-2 px-4 text-center border-b border-gold-500/30 flex items-center justify-center gap-3">
+            <span class="inline-flex items-center justify-center bg-gold-500 text-espresso-900 font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">
+                <i class="fa-solid fa-video mr-1"></i> Día Clave
+            </span>
+            <span><strong>Recordatorio de Producción:</strong> Todos los <strong>Lunes</strong> se graba el material en bruto de la semana (Cámara Pro, Osmo, Luces y Dron).</span>
+            <button @click="openShootStrategyModal = true" class="underline hover:text-white transition ml-2 font-medium">Ver Checklist de Grabación</button>
+        </div>
+
+        <!-- Header / Agency & Client Branding -->
+        <header class="bg-gradient-to-r from-espresso-900 via-espresso-800 to-espresso-900 text-white shadow-xl relative overflow-hidden border-b-2 border-gold-500">
+            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs uppercase tracking-widest text-gold-400 font-semibold bg-espresso-900/80 border border-gold-500/30 px-3 py-1 rounded-full">
+                                Agencia de Publicidad • Plan Estratégico Mensual
+                            </span>
+                        </div>
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-serif-title font-bold text-beige-100 tracking-wide flex items-center gap-3">
+                            DIFFERENT BEAUTY SALOON
+                            <span class="text-gold-400 text-2xl font-sans font-normal italic">| Cronograma</span>
+                        </h1>
+                        <p class="text-beige-300 text-sm sm:text-base mt-2 max-w-2xl leading-relaxed">
+                            Estrategia integral de contenidos: <strong class="text-gold-300">1 Video Diario</strong> + refuerzo estratégico en <strong>Posts e Historias</strong> (Lun, Mié, Vie, Sáb) para captación, autoridad y fidelización.
+                        </p>
+                    </div>
+
+                    <!-- Client Summary Card -->
+                    <div class="bg-espresso-800/80 backdrop-blur-sm border border-gold-500/30 rounded-xl p-4 flex flex-wrap sm:flex-nowrap gap-4 lg:gap-6 text-center sm:text-left shadow-inner">
+                        <div class="pr-0 sm:pr-4 sm:border-r border-gold-500/20 flex-1">
+                            <div class="text-xs text-beige-400 uppercase tracking-wider">Período de Campaña</div>
+                            <div class="text-sm font-semibold text-gold-300 mt-1">28 Sep - 01 Nov</div>
+                            <div class="text-[11px] text-beige-300">5 Bloques Semanales</div>
+                        </div>
+                        <div class="pr-0 sm:pr-4 sm:border-r border-gold-500/20 flex-1">
+                            <div class="text-xs text-beige-400 uppercase tracking-wider">Meta Producción</div>
+                            <div class="text-sm font-semibold text-gold-300 mt-1">35 Videos + 20 Posts</div>
+                            <div class="text-[11px] text-beige-300">7 Contenidos / Sem</div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="text-xs text-beige-400 uppercase tracking-wider">Progreso Global</div>
+                            <div class="text-sm font-semibold text-gold-300 mt-1">{{ completionPercentage }}% Completado</div>
+                            <div class="w-full bg-espresso-900 rounded-full h-1.5 mt-1 border border-gold-500/30">
+                                <div class="bg-gold-400 h-1.5 rounded-full transition-all duration-500" :style="{ width: completionPercentage + '%' }"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+
+            <!-- KPIs & Quick Metrics -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white border border-beige-300 rounded-xl p-4 shadow-sm hover:shadow-md transition gold-border-top">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-beige-700 uppercase tracking-wider">Total Videos Reels/TikTok</p>
+                            <h3 class="text-2xl font-bold text-espresso-900 mt-1">35</h3>
+                        </div>
+                        <div class="p-2 bg-beige-100 rounded-lg text-gold-600">
+                            <i class="fa-solid fa-clapperboard text-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-beige-600 mt-2"><i class="fa-solid fa-check text-green-600 mr-1"></i>1 video publicado cada día</p>
+                </div>
+
+                <div class="bg-white border border-beige-300 rounded-xl p-4 shadow-sm hover:shadow-md transition gold-border-top">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-beige-700 uppercase tracking-wider">Posts e Historias</p>
+                            <h3 class="text-2xl font-bold text-espresso-900 mt-1">20</h3>
+                        </div>
+                        <div class="p-2 bg-beige-100 rounded-lg text-gold-600">
+                            <i class="fa-solid fa-images text-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-beige-600 mt-2"><i class="fa-solid fa-calendar-days text-gold-600 mr-1"></i>Lun, Mié, Vie y Sáb</p>
+                </div>
+
+                <div class="bg-white border border-beige-300 rounded-xl p-4 shadow-sm hover:shadow-md transition gold-border-top">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-beige-700 uppercase tracking-wider">Días de Grabación</p>
+                            <h3 class="text-2xl font-bold text-espresso-900 mt-1">5 Lunes</h3>
+                        </div>
+                        <div class="p-2 bg-beige-100 rounded-lg text-gold-600">
+                            <i class="fa-solid fa-camera-rotate text-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-beige-600 mt-2"><i class="fa-solid fa-bolt text-gold-600 mr-1"></i>Grabación masiva semanal</p>
+                </div>
+
+                <div class="bg-white border border-beige-300 rounded-xl p-4 shadow-sm hover:shadow-md transition gold-border-top">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-semibold text-beige-700 uppercase tracking-wider">Publicados / Listos</p>
+                            <h3 class="text-2xl font-bold text-gold-700 mt-1">{{ publishedCount }} / {{ activities.length }}</h3>
+                        </div>
+                        <div class="p-2 bg-beige-100 rounded-lg text-gold-600">
+                            <i class="fa-solid fa-circle-check text-lg"></i>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-beige-600 mt-2">En constante actualización</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md border border-beige-300 p-4 sm:p-6 mb-8 no-print">
+                <div class="flex flex-col gap-4">
+
+                    <!-- Top Control Row: Search + Action Buttons -->
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-beige-200">
+                        <!-- Search Bar -->
+                        <div class="relative flex-1">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-beige-500"></i>
+                            <input 
+                                v-model="searchQuery" 
+                                type="text" 
+                                placeholder="Buscar por tema, servicio, tipo de contenido, palabras clave..."
+                                class="w-full pl-10 pr-4 py-2.5 bg-beige-50 border border-beige-300 rounded-lg text-sm text-espresso-900 focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:border-gold-500 placeholder-beige-400 transition"
+                            />
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button 
+                                @click="resetFilters" 
+                                class="px-3 py-2 text-xs font-medium text-beige-700 bg-beige-100 hover:bg-beige-200 rounded-lg transition flex items-center gap-1.5"
+                                title="Limpiar todos los filtros"
+                            >
+                                <i class="fa-solid fa-rotate-left"></i> Limpiar Filtros
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filter Options -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
+                        <!-- Filter Block / Week -->
+                        <div>
+                            <label class="block text-xs font-semibold text-espresso-800 uppercase tracking-wider mb-1.5">
+                                <i class="fa-solid fa-layer-group text-gold-600 mr-1"></i> Semana / Bloque
+                            </label>
+                            <select v-model="selectedBlock" class="w-full bg-beige-50 border border-beige-300 rounded-lg px-3 py-2 text-xs font-medium text-espresso-900 focus:ring-gold-500 focus:border-gold-500">
+                                <option :value="0">Todos los Bloques (Mes Completo)</option>
+                                <option :value="1">Bloque 1: 28 Sep - 04 Oct (Arranque & Concepto)</option>
+                                <option :value="2">Bloque 2: 05 Oct - 11 Oct (Educación & Oferta)</option>
+                                <option :value="3">Bloque 3: 12 Oct - 18 Oct (Autoridad & Productos)</option>
+                                <option :value="4">Bloque 4: 19 Oct - 25 Oct (Cercanía & Resultados)</option>
+                                <option :value="5">Bloque 5: 26 Oct - 01 Nov (Cierre & Anticipación)</option>
+                            </select>
+                        </div>
+
+                        <!-- Filter Content Category -->
+                        <div>
+                            <label class="block text-xs font-semibold text-espresso-800 uppercase tracking-wider mb-1.5">
+                                <i class="fa-solid fa-tags text-gold-600 mr-1"></i> Categoría de Contenido
+                            </label>
+                            <select v-model="selectedCategory" class="w-full bg-beige-50 border border-beige-300 rounded-lg px-3 py-2 text-xs font-medium text-espresso-900 focus:ring-gold-500 focus:border-gold-500">
+                                <option value="">Todas las Categorías</option>
+                                <option value="Instalaciones">Instalaciones & Recorrido</option>
+                                <option value="Tipos de Trabajo">Tipos de Trabajo / Especialidades</option>
+                                <option value="Experiencia">Experiencia & Lavado Capilar</option>
+                                <option value="Humor">Humor & Tendencias</option>
+                                <option value="Transformación">Transformación / Cambio de Look</option>
+                                <option value="Maquillaje">Maquillaje & Peinados Sociales</option>
+                                <option value="Testimonio">Testimonios & Clientes</option>
+                                <option value="Promocional">Promociones & Ofertas</option>
+                                <option value="Educativo">Educativo / Productos Pro</option>
+                                <option value="ASMR">ASMR / Sonidos del Salón</option>
+                            </select>
+                        </div>
+
+                        <!-- Filter Status -->
+                        <div>
+                            <label class="block text-xs font-semibold text-espresso-800 uppercase tracking-wider mb-1.5">
+                                <i class="fa-solid fa-list-check text-gold-600 mr-1"></i> Estado de Producción
+                            </label>
+                            <select v-model="selectedStatus" class="w-full bg-beige-50 border border-beige-300 rounded-lg px-3 py-2 text-xs font-medium text-espresso-900 focus:ring-gold-500 focus:border-gold-500">
+                                <option value="">Todos los Estados</option>
+                                <option value="Pendiente">🟡 Pendiente</option>
+                                <option value="En Grabación">🔵 En Grabación (Lunes)</option>
+                                <option value="Editando">🟣 En Edición</option>
+                                <option value="Programado">🟠 Programado</option>
+                                <option value="Publicado">🟢 Publicado</option>
+                            </select>
+                        </div>
+
+                        <!-- View Switcher -->
+                        <div>
+                            <label class="block text-xs font-semibold text-espresso-800 uppercase tracking-wider mb-1.5">
+                                <i class="fa-solid fa-eye text-gold-600 mr-1"></i> Vista del Cronograma
+                            </label>
+                            <div class="grid grid-cols-3 gap-1 bg-beige-100 p-1 rounded-lg border border-beige-300 text-center text-xs font-medium">
+                                <button 
+                                    @click="viewMode = 'cards'" 
+                                    :class="viewMode === 'cards' ? 'bg-white shadow text-espresso-900 font-bold' : 'text-beige-700 hover:text-espresso-900'"
+                                    class="py-1.5 rounded transition"
+                                >
+                                    Tarjetas
+                                </button>
+                                <button 
+                                    @click="viewMode = 'calendar'" 
+                                    :class="viewMode === 'calendar' ? 'bg-white shadow text-espresso-900 font-bold' : 'text-beige-700 hover:text-espresso-900'"
+                                    class="py-1.5 rounded transition"
+                                >
+                                    Calendario
+                                </button>
+                                <button 
+                                    @click="viewMode = 'table'" 
+                                    :class="viewMode === 'table' ? 'bg-white shadow text-espresso-900 font-bold' : 'text-beige-700 hover:text-espresso-900'"
+                                    class="py-1.5 rounded transition"
+                                >
+                                    Tabla
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div v-if="viewMode === 'cards'" class="space-y-10">
+                <div v-for="blockNum in activeBlockNumbers" :key="blockNum" class="space-y-4">
+                    
+                    <!-- Week Header -->
+                    <div class="bg-gradient-to-r from-espresso-900 via-espresso-800 to-beige-900 text-white p-4 rounded-xl shadow border-l-4 border-gold-400 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                        <div>
+                            <span class="text-xs uppercase font-semibold text-gold-400 tracking-widest">
+                                BLOQUE {{ blockNum }} • {{ getBlockDates(blockNum) }}
+                            </span>
+                            <h2 class="text-xl sm:text-2xl font-serif-title font-bold text-beige-100">
+                                {{ getBlockTheme(blockNum) }}
+                            </h2>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs bg-espresso-900/80 px-3 py-1.5 rounded-lg border border-gold-500/30 text-beige-200">
+                                <i class="fa-solid fa-video text-gold-400 mr-1"></i> 7 Videos Diarios
+                            </span>
+                            <span class="text-xs bg-espresso-900/80 px-3 py-1.5 rounded-lg border border-gold-500/30 text-beige-200">
+                                <i class="fa-solid fa-image text-gold-400 mr-1"></i> 4 Refuerzos (Post/Story)
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Cards Grid for the Week -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        <div 
+                            v-for="item in getFilteredItemsByBlock(blockNum)" 
+                            :key="item.id"
+                            class="bg-white rounded-xl border transition-all duration-300 hover:shadow-lg flex flex-col justify-between overflow-hidden group"
+                            :class="[
+                                item.dayName === 'Lunes' ? 'border-gold-400 ring-1 ring-gold-400/30' : 'border-beige-300 hover:border-beige-400',
+                                item.status === 'Publicado' ? 'bg-beige-50/50' : ''
+                            ]"
+                        >
+                            <!-- Card Top Bar -->
+                            <div class="p-4 border-b border-beige-100 flex items-center justify-between bg-beige-50/60">
+                                <div class="flex items-center gap-2">
+                                    <span 
+                                        class="px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider"
+                                        :class="item.dayName === 'Lunes' ? 'bg-gold-500 text-espresso-900 font-extrabold' : 'bg-espresso-800 text-white'"
+                                    >
+                                        {{ item.dayName }}
+                                    </span>
+                                    <span class="text-xs text-beige-700 font-medium">{{ item.date }}</span>
+                                </div>
+
+                                <!-- Status Badge Picker -->
+                                <button 
+                                    @click.stop="cycleStatus(item)"
+                                    class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border transition flex items-center gap-1 shadow-sm"
+                                    :class="getStatusBadgeClass(item.status)"
+                                    title="Haz clic para cambiar el estado de producción"
+                                >
+                                    <i class="fa-solid" :class="getStatusIcon(item.status)"></i>
+                                    {{ item.status }}
+                                </button>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="p-4 flex-1 flex flex-col justify-between gap-4">
+                                
+                                <!-- Content details -->
+                                <div>
+                                    <!-- Category Pill -->
+                                    <div class="flex items-center justify-between gap-2 mb-2">
+                                        <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-beige-200 text-espresso-900 rounded border border-beige-300">
+                                            {{ item.category }}
+                                        </span>
+                                        <span v-if="item.dayName === 'Lunes'" class="text-[10px] font-semibold text-gold-700 bg-gold-100 border border-gold-300 px-1.5 py-0.5 rounded">
+                                            <i class="fa-solid fa-camera mr-1"></i>Día de Rodaje
+                                        </span>
+                                    </div>
+
+                                    <!-- Video Title & Description -->
+                                    <div class="mb-3">
+                                        <div class="flex items-center gap-1.5 text-xs font-bold text-gold-700 uppercase tracking-wide mb-1">
+                                            <i class="fa-solid fa-circle-play text-red-600"></i> Video Diario (Reels/TikTok)
+                                        </div>
+                                        <h3 class="font-bold text-espresso-900 text-sm leading-snug group-hover:text-gold-700 transition">
+                                            {{ item.videoTitle }}
+                                        </h3>
+                                        <p class="text-xs text-beige-800 mt-1 line-clamp-3 leading-relaxed">
+                                            {{ item.videoDesc }}
+                                        </p>
+                                    </div>
+
+                                    <!-- Post / Story Reinforcement -->
+                                    <div v-if="item.hasPost" class="p-2.5 bg-beige-100/70 rounded-lg border border-beige-300/80 mt-2">
+                                        <div class="flex items-center gap-1.5 text-[11px] font-bold text-espresso-800 mb-0.5">
+                                            <i class="fa-solid fa-photo-film text-purple-600"></i> Post & Historias (Refuerzo)
+                                        </div>
+                                        <p class="text-xs text-beige-900 font-medium leading-snug">
+                                            {{ item.postDesc }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Equipment Badges & Actions -->
+                                <div class="pt-2 border-t border-beige-200/80">
+                                    <div class="flex flex-wrap items-center justify-between gap-2">
+                                        <!-- Gear Tags -->
+                                        <div class="flex flex-wrap gap-1">
+                                            <span 
+                                                v-for="gear in item.equipment" 
+                                                :key="gear"
+                                                class="text-[9px] font-medium bg-beige-200 text-espresso-900 px-1.5 py-0.5 rounded"
+                                            >
+                                                {{ gear }}
+                                            </span>
+                                        </div>
+
+                                        <!-- Detail Button -->
+                                        <button 
+                                            @click="openItemModal(item)"
+                                            class="text-xs font-semibold text-gold-700 hover:text-espresso-900 hover:underline flex items-center gap-1 ml-auto"
+                                        >
+                                            Detalles <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div v-if="viewMode === 'calendar'" class="bg-white rounded-xl shadow border border-beige-300 p-4 sm:p-6">
+                <div class="mb-4 flex items-center justify-between">
+                    <h2 class="text-xl font-serif-title font-bold text-espresso-900">
+                        Vista Calendario de Publicación (28 Sep - 01 Nov)
+                    </h2>
+                    <div class="text-xs text-beige-600">
+                        <span class="inline-block w-3 h-3 bg-gold-400 rounded-full mr-1"></span> Lunes = Día de Grabación
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-7 gap-1 sm:gap-2 text-center text-xs font-bold text-espresso-900 mb-2 border-b border-beige-200 pb-2">
+                    <div>Lunes</div>
+                    <div>Martes</div>
+                    <div>Miércoles</div>
+                    <div>Jueves</div>
+                    <div>Viernes</div>
+                    <div>Sábado</div>
+                    <div>Domingo</div>
+                </div>
+
+                <div class="grid grid-cols-7 gap-1 sm:gap-2">
+                    <div 
+                        v-for="item in filteredActivities" 
+                        :key="item.id"
+                        @click="openItemModal(item)"
+                        class="min-h-[120px] p-2 border rounded-lg transition text-left cursor-pointer flex flex-col justify-between hover:shadow-md group"
+                        :class="[
+                            item.dayName === 'Lunes' ? 'bg-gold-50/60 border-gold-300' : 'bg-beige-50/50 border-beige-200 hover:border-gold-400',
+                            item.status === 'Publicado' ? 'bg-green-50/40' : ''
+                        ]"
+                    >
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="font-bold text-xs text-espresso-900">{{ item.date.split(' ')[0] }}</span>
+                                <span class="text-[9px] px-1 rounded font-semibold" :class="getStatusBadgeClass(item.status)">
+                                    {{ item.status.substring(0,4) }}.
+                                </span>
+                            </div>
+
+                            <p class="text-[11px] font-bold text-espresso-900 leading-tight group-hover:text-gold-700 line-clamp-2">
+                                {{ item.videoTitle }}
+                            </p>
+                        </div>
+
+                        <div class="mt-2 pt-1 border-t border-beige-200/60 flex items-center justify-between text-[10px]">
+                            <span class="text-gold-700 font-medium truncate">{{ item.category }}</span>
+                            <span v-if="item.hasPost" title="Incluye Post/Historia" class="text-purple-600 font-bold">
+                                <i class="fa-solid fa-image"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="viewMode === 'table'" class="bg-white rounded-xl shadow border border-beige-300 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-espresso-900 text-gold-200 uppercase font-semibold text-[11px] tracking-wider border-b border-gold-500/30">
+                            <tr>
+                                <th class="p-3">Bloque</th>
+                                <th class="p-3">Día / Fecha</th>
+                                <th class="p-3">Tipo / Categoría</th>
+                                <th class="p-3">Video Diario (1/Día)</th>
+                                <th class="p-3">Refuerzo (Post / Historias)</th>
+                                <th class="p-3">Equipos Requeridos</th>
+                                <th class="p-3 text-center">Estado</th>
+                                <th class="p-3 text-right">Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-beige-200">
+                            <tr v-for="item in filteredActivities" :key="item.id" class="hover:bg-beige-50/80 transition">
+                                <td class="p-3 font-semibold text-espresso-800">Bloque {{ item.weekBlock }}</td>
+                                <td class="p-3 whitespace-nowrap">
+                                    <span class="font-bold block text-espresso-900">{{ item.dayName }}</span>
+                                    <span class="text-beige-600 text-[11px]">{{ item.date }}</span>
+                                </td>
+                                <td class="p-3">
+                                    <span class="px-2 py-0.5 bg-beige-200 text-espresso-900 font-semibold rounded text-[10px]">
+                                        {{ item.category }}
+                                    </span>
+                                </td>
+                                <td class="p-3">
+                                    <strong class="text-espresso-900 block text-xs">{{ item.videoTitle }}</strong>
+                                    <span class="text-beige-700 text-[11px] leading-tight block mt-0.5">{{ item.videoDesc }}</span>
+                                </td>
+                                <td class="p-3">
+                                    <div v-if="item.hasPost" class="text-purple-900 font-medium">
+                                        <i class="fa-solid fa-check text-purple-600 mr-1"></i> {{ item.postDesc }}
+                                    </div>
+                                    <div v-else class="text-beige-400 italic">N/A</div>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex flex-wrap gap-1">
+                                        <span v-for="g in item.equipment" :key="g" class="bg-beige-200 text-espresso-900 px-1.5 py-0.5 rounded text-[10px]">
+                                            {{ g }}
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="p-3 text-center whitespace-nowrap">
+                                    <button 
+                                        @click="cycleStatus(item)"
+                                        class="px-2.5 py-1 rounded-full text-[11px] font-semibold border"
+                                        :class="getStatusBadgeClass(item.status)"
+                                    >
+                                        {{ item.status }}
+                                    </button>
+                                </td>
+                                <td class="p-3 text-right">
+                                    <button @click="openItemModal(item)" class="text-gold-700 hover:text-espresso-900 font-bold">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+
+        <div v-if="selectedItem" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm no-print">
+            <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gold-400 flex flex-col">
+                
+                <!-- Modal Header -->
+                <div class="bg-gradient-to-r from-espresso-900 to-espresso-800 p-6 text-white border-b border-gold-500/40 relative">
+                    <button @click="selectedItem = null" class="absolute top-4 right-4 text-beige-300 hover:text-white text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="px-2.5 py-0.5 bg-gold-500 text-espresso-900 font-bold text-xs uppercase rounded">
+                            {{ selectedItem.dayName }} • {{ selectedItem.date }}
+                        </span>
+                        <span class="text-xs text-gold-300">Bloque {{ selectedItem.weekBlock }}</span>
+                    </div>
+                    <h3 class="text-2xl font-serif-title font-bold text-beige-100">
+                        {{ selectedItem.videoTitle }}
+                    </h3>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-6 space-y-6 flex-1">
+                    
+                    <!-- Status Selector -->
+                    <div class="flex items-center justify-between p-3 bg-beige-50 rounded-xl border border-beige-300">
+                        <span class="text-xs font-bold uppercase text-espresso-900">Estado de Producción:</span>
+                        <select v-model="selectedItem.status" @change="saveToLocalStorage" class="bg-white border border-beige-300 rounded-lg text-xs font-bold py-1.5 px-3 focus:ring-gold-500">
+                            <option value="Pendiente">🟡 Pendiente</option>
+                            <option value="En Grabación">🔵 En Grabación (Lunes)</option>
+                            <option value="Editando">🟣 En Edición</option>
+                            <option value="Programado">🟠 Programado</option>
+                            <option value="Publicado">🟢 Publicado</option>
+                        </select>
+                    </div>
+
+                    <!-- Video Details Block -->
+                    <div class="bg-gold-50/50 p-4 rounded-xl border border-gold-200">
+                        <h4 class="text-sm font-bold text-espresso-900 flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-video text-gold-600"></i> Formato 1: Video Diario (Reels / TikTok)
+                        </h4>
+                        <p class="text-xs text-espresso-800 leading-relaxed font-medium">
+                            {{ selectedItem.videoDesc }}
+                        </p>
+                    </div>
+
+                    <!-- Post / Story Details Block -->
+                    <div class="bg-beige-100/60 p-4 rounded-xl border border-beige-300">
+                        <h4 class="text-sm font-bold text-espresso-900 flex items-center gap-2 mb-2">
+                            <i class="fa-solid fa-images text-purple-600"></i> Formato 2: Refuerzo Post / Historias
+                        </h4>
+                        <p class="text-xs text-espresso-800 leading-relaxed">
+                            {{ selectedItem.hasPost ? selectedItem.postDesc : 'No incluye publicación estática este día (Día focalizado exclusivamente en Video Diario).' }}
+                        </p>
+                    </div>
+
+                    <!-- Equipment & Guidelines -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-3 bg-beige-50 rounded-xl border border-beige-300">
+                            <h5 class="text-xs font-bold text-espresso-900 uppercase tracking-wider mb-2">
+                                <i class="fa-solid fa-camera-retro text-gold-600 mr-1"></i> Equipos para Rodaje
+                            </h5>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span v-for="e in selectedItem.equipment" :key="e" class="bg-beige-200 text-espresso-900 text-xs px-2 py-0.5 rounded font-medium">
+                                    {{ e }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-beige-50 rounded-xl border border-beige-300">
+                            <h5 class="text-xs font-bold text-espresso-900 uppercase tracking-wider mb-2">
+                                <i class="fa-solid fa-bulltarget text-gold-600 mr-1"></i> Objetivo Estratégico
+                            </h5>
+                            <p class="text-xs text-beige-800">
+                                {{ getCategoryObjective(selectedItem.category) }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Internal Agency Notes & Script Box -->
+                    <div>
+                        <label class="block text-xs font-bold text-espresso-900 uppercase tracking-wider mb-1.5">
+                            <i class="fa-solid fa-note-sticky text-gold-600 mr-1"></i> Notas del Equipo / Guion / Caption
+                        </label>
+                        <textarea 
+                            v-model="selectedItem.notes" 
+                            @input="saveToLocalStorage"
+                            rows="3" 
+                            placeholder="Añade aquí ideas de audio viral, texto para portada, copy de Instagram o recordatorios de edición..."
+                            class="w-full bg-beige-50 border border-beige-300 rounded-xl p-3 text-xs text-espresso-900 focus:ring-gold-500 focus:border-gold-500 placeholder-beige-400"
+                        ></textarea>
+                    </div>
+
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="p-4 bg-beige-100 border-t border-beige-300 flex justify-between items-center">
+                    <span class="text-xs text-beige-600">Cambios guardados automáticamente</span>
+                    <button @click="selectedItem = null" class="px-5 py-2 bg-espresso-900 hover:bg-black text-white text-xs font-bold rounded-xl transition">
+                        Cerrar Detalle
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div v-if="openShootStrategyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm no-print">
+            <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-gold-400 space-y-6">
+                <div class="flex items-center justify-between border-b border-beige-200 pb-4">
+                    <h3 class="text-xl font-serif-title font-bold text-espresso-900 flex items-center gap-2">
+                        <i class="fa-solid fa-video text-gold-600"></i> Protocolo de Producción: Día Lunes
+                    </h3>
+                    <button @click="openShootStrategyModal = false" class="text-beige-500 hover:text-espresso-900 text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-4 text-xs text-espresso-800 leading-relaxed">
+                    <p class="bg-gold-50 border border-gold-300 p-3 rounded-lg font-medium text-espresso-900">
+                        <strong>Metodología de Rodaje Masivo:</strong> Todos los lunes la agencia despliega equipos en el salón para capturar el 100% de tomas en bruto necesarias para la semana.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="p-3 bg-beige-50 rounded-lg border border-beige-300">
+                            <h4 class="font-bold text-espresso-900 text-sm mb-1"><i class="fa-solid fa-camera mr-1 text-gold-600"></i> Cámara Profesional</h4>
+                            <p>Para detalles de maquillajes, texturas de cabello, colorimetría en mechas y primeros planos de acabado impecable.</p>
+                        </div>
+                        <div class="p-3 bg-beige-50 rounded-lg border border-beige-300">
+                            <h4 class="font-bold text-espresso-900 text-sm mb-1"><i class="fa-solid fa-mobile-screen-button mr-1 text-gold-600"></i> Osmo / Gimbal</h4>
+                            <p>Recorridos fluidos por la recepción, zona de lavados capilares, movimiento de estilistas y ambiente dinámico de clientes.</p>
+                        </div>
+                        <div class="p-3 bg-beige-50 rounded-lg border border-beige-300">
+                            <h4 class="font-bold text-espresso-900 text-sm mb-1"><i class="fa-solid fa-drone mr-1 text-gold-600"></i> Dron (Si Aplica)</h4>
+                            <p>Tomas aéreas exteriores del local, llegada elegante de clientas y ubicación estratégica de la fachada.</p>
+                        </div>
+                        <div class="p-3 bg-beige-50 rounded-lg border border-beige-300">
+                            <h4 class="font-bold text-espresso-900 text-sm mb-1"><i class="fa-solid fa-lightbulb mr-1 text-gold-600"></i> Iluminación & Audio</h4>
+                            <p>Luces continuas para área de maquillaje y micrófonos corbateros para testimonios y tips educativos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-right border-t border-beige-200 pt-4">
+                    <button @click="openShootStrategyModal = false" class="px-5 py-2 bg-espresso-900 text-white font-bold text-xs rounded-lg hover:bg-black transition">
+                        Entendido
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    selectedBlock: 0,
+                    selectedCategory: '',
+                    selectedStatus: '',
+                    searchQuery: '',
+                    viewMode: 'cards', // 'cards', 'calendar', 'table'
+                    selectedItem: null,
+                    openShootStrategyModal: false,
+                    activities: [
+                        // BLOQUE 1: 28 Sep - 04 Oct
+                        { id: 1, weekBlock: 1, dayName: 'Lunes', date: '28 Sep', category: 'Instalaciones', videoTitle: 'Recorrido Visual por el Salón', videoDesc: 'Recorrido visual fluido por las instalaciones del salón usando Osmo, mostrando iluminación, limpieza, confort y recepción.', hasPost: true, postDesc: 'Bienvenida a la semana + Recordatorio de agenda abierta.', equipment: ['Osmo', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 2, weekBlock: 1, dayName: 'Martes', date: '29 Sep', category: 'Tipos de Trabajo', videoTitle: 'Especialistas en Cortes en Tendencia', videoDesc: 'Demostración paso a paso de cortes modernos para dama y perfilado estilizado.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 3, weekBlock: 1, dayName: 'Miércoles', date: '30 Sep', category: 'Experiencia', videoTitle: 'Lavado Capilar Relajante & Bienestar', videoDesc: 'Enfoque en la experiencia sensorial de relajación en la zona de lavados capilares.', hasPost: true, postDesc: 'Tips rápidos de cuidado capilar en casa.', equipment: ['Cámara Pro', 'Osmo'], status: 'Pendiente', notes: '' },
+                        { id: 4, weekBlock: 1, dayName: 'Jueves', date: '01 Oct', category: 'Humor', videoTitle: 'Humor: Cómo llegué vs. Cómo salí', videoDesc: 'Tendencia de audio divertida mostrando la transformación de actitud y belleza al salir del salón.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 5, weekBlock: 1, dayName: 'Viernes', date: '02 Oct', category: 'Transformación', videoTitle: 'Cambio de Look Completo (Antes y Después)', videoDesc: 'Transformación impactante antes y después de un tinte o corte radical.', hasPost: true, postDesc: 'Promoción especial de fin de semana para arreglarse para salir.', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 6, weekBlock: 1, dayName: 'Sábado', date: '03 Oct', category: 'Maquillaje', videoTitle: 'Maquillaje Profesional para Eventos', videoDesc: 'Detalles de la técnica impecable con la cámara profesional para eventos sociales.', hasPost: true, postDesc: 'Fotos de los mejores looks salidos hoy del salón.', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 7, weekBlock: 1, dayName: 'Domingo', date: '04 Oct', category: 'Testimonio', videoTitle: 'Satisfacción y Testimonio Real', videoDesc: 'Testimonio rápido y reacción espontánea de una clienta saliendo feliz del salón.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+
+                        // BLOQUE 2: 05 Oct - 11 Oct
+                        { id: 8, weekBlock: 2, dayName: 'Lunes', date: '05 Oct', category: 'Educativo', videoTitle: 'Presentación Estilista Estrella', videoDesc: 'Conoce a una de nuestras estilistas estrella, su trayectoria y su especialidad principal.', hasPost: true, postDesc: 'Planifica tu semana de belleza.', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 9, weekBlock: 2, dayName: 'Martes', date: '06 Oct', category: 'Tipos de Trabajo', videoTitle: 'Diseños de Color & Mechas (Balayage)', videoDesc: 'Proceso y aplicación de técnicas Balayage y Babylights para iluminación natural.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 10, weekBlock: 2, dayName: 'Miércoles', date: '07 Oct', category: 'Promocional', videoTitle: 'Oferta Especial: Combo Corte + Tratamiento', videoDesc: 'Video dinámico anunciando la oferta del combo especial con precio preferencial.', hasPost: true, postDesc: 'Placa gráfica detallando los beneficios de la oferta.', equipment: ['Osmo', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 11, weekBlock: 2, dayName: 'Jueves', date: '08 Oct', category: 'Humor', videoTitle: 'Relación Amor-Odio con Planchas y Secadoras', videoDesc: 'Sketched cómico sobre los intentos fallidos de peinarse en casa vs venir al salón.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 12, weekBlock: 2, dayName: 'Viernes', date: '09 Oct', category: 'Maquillaje', videoTitle: 'Maquillaje y Peinado Novias / Quinceañeras', videoDesc: 'Detrás de escena del proceso delicado para Novias y Quinceañeras en su gran día.', hasPost: true, postDesc: 'Recordatorio de citas disponibles para bodas/eventos.', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 13, weekBlock: 2, dayName: 'Sábado', date: '10 Oct', category: 'Instalaciones', videoTitle: 'El Bullicio y Energía de un Sábado Lleno', videoDesc: 'Tomas dinámicas con Osmo capturando la vibra, movimiento y energía del salón en su día pico.', hasPost: true, postDesc: 'Galería de clientas felices del día.', equipment: ['Osmo'], status: 'Pendiente', notes: '' },
+                        { id: 14, weekBlock: 2, dayName: 'Domingo', date: '11 Oct', category: 'ASMR', videoTitle: 'ASMR Cuidado del Cabello', videoDesc: 'Sonidos envolventes de lavado, cepillado suave, tijeras y secado para relajación.', hasPost: false, postDesc: '', equipment: ['Cámara Pro', 'Micrófono ASMR'], status: 'Pendiente', notes: '' },
+
+                        // BLOQUE 3: 12 Oct - 18 Oct
+                        { id: 15, weekBlock: 3, dayName: 'Lunes', date: '12 Oct', category: 'Instalaciones', videoTitle: 'Llegada Elegante & Tomas de Fachada', videoDesc: 'Toma exterior con Dron/Llegada elegante + entrada triunfal a la recepción.', hasPost: true, postDesc: 'Horarios y ubicación exacta del salón.', equipment: ['Dron', 'Osmo'], status: 'Pendiente', notes: '' },
+                        { id: 16, weekBlock: 3, dayName: 'Martes', date: '13 Oct', category: 'Tipos de Trabajo', videoTitle: 'Tratamientos de Hidratación Profunda', videoDesc: 'Demostración de reparación capilar intensa paso a paso.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 17, weekBlock: 3, dayName: 'Miércoles', date: '14 Oct', category: 'Educativo', videoTitle: 'Demostración de Productos Profesionales', videoDesc: 'Dándole valor a las marcas de alta gama que garantizan la salud del cabello.', hasPost: true, postDesc: '¿Por qué es importante usar productos profesionales?', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 18, weekBlock: 3, dayName: 'Jueves', date: '15 Oct', category: 'Humor', videoTitle: 'Humor Interno: Detrás de Cámaras', videoDesc: 'Momentos divertidos e interacción espontánea del equipo de trabajo.', hasPost: false, postDesc: '', equipment: ['Osmo'], status: 'Pendiente', notes: '' },
+                        { id: 19, weekBlock: 3, dayName: 'Viernes', date: '16 Oct', category: 'Transformación', videoTitle: 'El Antes y Después Más Impactante', videoDesc: 'Cambio de look radical, mostrando el proceso completo de transformación.', hasPost: true, postDesc: 'El poder de un buen corte de cabello.', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 20, weekBlock: 3, dayName: 'Sábado', date: '17 Oct', category: 'Maquillaje', videoTitle: 'Preparación para Eventos Nocturnos', videoDesc: 'Glitz y glamour de nuestras clientas preparándose para la noche de sábado.', hasPost: true, postDesc: 'Estilos de peinado en tendencia para la noche.', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 21, weekBlock: 3, dayName: 'Domingo', date: '18 Oct', category: 'Educativo', videoTitle: 'Consejo Dominical de Autocuidado', videoDesc: 'Tips de belleza y cuidado en casa narrado por una de nuestras expertas.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+
+                        // BLOQUE 4: 19 Oct - 25 Oct
+                        { id: 22, weekBlock: 4, dayName: 'Lunes', date: '19 Oct', category: 'Experiencia', videoTitle: 'Zona de Lavados & Spa Capilar', videoDesc: 'Aspiracional recorrido por la zona de lavados y máxima relajación.', hasPost: true, postDesc: 'Empieza la semana consintiéndote en el salón.', equipment: ['Osmo', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 23, weekBlock: 4, dayName: 'Martes', date: '20 Oct', category: 'Tipos de Trabajo', videoTitle: 'Peinados Sociales & Trenzas Tendencia', videoDesc: 'Demostración visual de peinados elaborados y trenzados de moda.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 24, weekBlock: 4, dayName: 'Miércoles', date: '21 Oct', category: 'Promocional', videoTitle: 'Paquete Mantenimiento de Color', videoDesc: 'Promoción especial de temporada para retoque de raíz y brillo capilar.', hasPost: true, postDesc: 'Recordatorio de espacios limitados esta semana.', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 25, weekBlock: 4, dayName: 'Jueves', date: '22 Oct', category: 'Humor', videoTitle: 'Situaciones Comunes en la Silla del Salón', videoDesc: 'Video de humor parodiando charlas icónicas en la silla del salón.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 26, weekBlock: 4, dayName: 'Viernes', date: '23 Oct', category: 'Maquillaje', videoTitle: 'Maquillaje Exprés vs. Maquillaje de Gala', videoDesc: 'Proceso dinámico comparando ambos estilos de maquillaje.', hasPost: true, postDesc: '¡Listas para el fin de semana con el mejor look!', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 27, weekBlock: 4, dayName: 'Sábado', date: '24 Oct', category: 'Transformación', videoTitle: 'Resumen Dinámico de Trabajos de la Semana', videoDesc: 'Recopilación rápida de los mejores peinados, tintes y estilos de la semana.', hasPost: true, postDesc: 'Testimonios en texto de clientas satisfechas.', equipment: ['Osmo'], status: 'Pendiente', notes: '' },
+                        { id: 28, weekBlock: 4, dayName: 'Domingo', date: '25 Oct', category: 'Experiencia', videoTitle: 'Momento de Descanso y Agradecimiento', videoDesc: 'Ambiente tranquilo y acogedor del salón listo para iniciar una nueva semana.', hasPost: false, postDesc: '', equipment: ['Osmo'], status: 'Pendiente', notes: '' },
+
+                        // BLOQUE 5: 26 Oct - 01 Nov
+                        { id: 29, weekBlock: 5, dayName: 'Lunes', date: '26 Oct', category: 'Instalaciones', videoTitle: 'Estaciones Impecables & Equipo de Alta Gama', videoDesc: 'Recorrido por las estaciones limpias, ordenadas y herramientas de nivel internacional.', hasPost: true, postDesc: 'Agenda tu cita para cerrar el mes impecable.', equipment: ['Osmo', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 30, weekBlock: 5, dayName: 'Martes', date: '27 Oct', category: 'Tipos de Trabajo', videoTitle: 'El Arte del Maquillaje Social Paso a Paso', videoDesc: 'Tutorial estilizado destacando técnicas de sombreado y acabado de piel perfecto.', hasPost: false, postDesc: '', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 31, weekBlock: 5, dayName: 'Miércoles', date: '28 Oct', category: 'Promocional', videoTitle: 'Video Promocional Especial Cierre de Mes', videoDesc: 'Aprovecha las promociones de fin de mes antes que terminen.', hasPost: true, postDesc: 'Últimos espacios disponibles de la semana.', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 32, weekBlock: 5, dayName: 'Jueves', date: '29 Oct', category: 'Humor', videoTitle: 'Humor: Cosas de Estilistas que Nadie Ve', videoDesc: 'Humor liviano del equipo de belleza en plena jornada.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' },
+                        { id: 33, weekBlock: 5, dayName: 'Viernes', date: '30 Oct', category: 'Transformación', videoTitle: 'Look de Fiesta Impactante', videoDesc: 'Transformación rápida para eventos especiales de fin de mes.', hasPost: true, postDesc: 'Prepárate para destacar este fin de semana.', equipment: ['Cámara Pro', 'Luces'], status: 'Pendiente', notes: '' },
+                        { id: 34, weekBlock: 5, dayName: 'Sábado', date: '31 Oct', category: 'Humor', videoTitle: 'Especial / Humor Festivo de Temporada', videoDesc: 'Video divertido o temático adaptado a la fecha festiva con el equipo.', hasPost: true, postDesc: 'Mensaje festivo a toda nuestra comunidad.', equipment: ['Osmo'], status: 'Pendiente', notes: '' },
+                        { id: 35, weekBlock: 5, dayName: 'Domingo', date: '01 Nov', category: 'Educativo', videoTitle: 'Agradecimiento Mensual & Anticipación', videoDesc: 'Mensaje especial a los seguidores agradeciendo por un mes increíble.', hasPost: false, postDesc: '', equipment: ['Cámara Pro'], status: 'Pendiente', notes: '' }
+                    ]
+                };
+            },
+            mounted() {
+                // Load persisted status changes from LocalStorage if existing
+                const savedData = localStorage.getItem('different_beauty_activities');
+                if (savedData) {
+                    try {
+                        this.activities = JSON.parse(savedData);
+                    } catch (e) {
+                        console.error('Error loading saved schedule data', e);
+                    }
+                }
+            },
+            computed: {
+                activeBlockNumbers() {
+                    if (this.selectedBlock !== 0) {
+                        return [this.selectedBlock];
+                    }
+                    return [1, 2, 3, 4, 5];
+                },
+                filteredActivities() {
+                    return this.activities.filter(item => {
+                        const matchesBlock = this.selectedBlock === 0 || item.weekBlock === this.selectedBlock;
+                        const matchesCategory = !this.selectedCategory || item.category === this.selectedCategory;
+                        const matchesStatus = !this.selectedStatus || item.status === this.selectedStatus;
+                        
+                        const query = this.searchQuery.toLowerCase().trim();
+                        const matchesSearch = !query || 
+                            item.videoTitle.toLowerCase().includes(query) ||
+                            item.videoDesc.toLowerCase().includes(query) ||
+                            item.postDesc.toLowerCase().includes(query) ||
+                            item.category.toLowerCase().includes(query) ||
+                            item.dayName.toLowerCase().includes(query);
+
+                        return matchesBlock && matchesCategory && matchesStatus && matchesSearch;
+                    });
+                },
+                publishedCount() {
+                    return this.activities.filter(a => a.status === 'Publicado').length;
+                },
+                completionPercentage() {
+                    if (!this.activities.length) return 0;
+                    return Math.round((this.publishedCount / this.activities.length) * 100);
+                }
+            },
+            methods: {
+                getBlockDates(block) {
+                    const dates = {
+                        1: '28 Sep al 04 Oct',
+                        2: '05 Oct al 11 Oct',
+                        3: '12 Oct al 18 Oct',
+                        4: '19 Oct al 25 Oct',
+                        5: '26 Oct al 01 Nov'
+                    };
+                    return dates[block] || '';
+                },
+                getBlockTheme(block) {
+                    const themes = {
+                        1: 'Semana 1: Arranque de Mes, Concepto & Atracción Visual',
+                        2: 'Semana 2: Educación al Cliente, Variedad de Servicios & Oferta',
+                        3: 'Semana 3: Autoridad, Calidad de Productos & Estilo de Vida',
+                        4: 'Semana 4: Cercanía, Interacción & Resultados Reales',
+                        5: 'Semana 5: Cierre de Mes & Anticipación a la Siguiente Temporada'
+                    };
+                    return themes[block] || '';
+                },
+                getFilteredItemsByBlock(blockNum) {
+                    return this.filteredActivities.filter(a => a.weekBlock === blockNum);
+                },
+                getStatusBadgeClass(status) {
+                    switch (status) {
+                        case 'Publicado': return 'bg-green-100 text-green-800 border-green-300';
+                        case 'Programado': return 'bg-orange-100 text-orange-800 border-orange-300';
+                        case 'Editando': return 'bg-purple-100 text-purple-800 border-purple-300';
+                        case 'En Grabación': return 'bg-blue-100 text-blue-800 border-blue-300';
+                        default: return 'bg-amber-100 text-amber-800 border-amber-300';
+                    }
+                },
+                getStatusIcon(status) {
+                    switch (status) {
+                        case 'Publicado': return 'fa-circle-check text-green-600';
+                        case 'Programado': return 'fa-clock text-orange-600';
+                        case 'Editando': return 'fa-wand-magic-sparkles text-purple-600';
+                        case 'En Grabación': return 'fa-video text-blue-600';
+                        default: return 'fa-hourglass-start text-amber-600';
+                    }
+                },
+                cycleStatus(item) {
+                    const statuses = ['Pendiente', 'En Grabación', 'Editando', 'Programado', 'Publicado'];
+                    const currentIndex = statuses.indexOf(item.status);
+                    const nextIndex = (currentIndex + 1) % statuses.length;
+                    item.status = statuses[nextIndex];
+                    this.saveToLocalStorage();
+                },
+                openItemModal(item) {
+                    this.selectedItem = item;
+                },
+                getCategoryObjective(category) {
+                    const objectives = {
+                        'Instalaciones': 'Generar deseo, transmitir higiene, confort de lujo y espacio amplio.',
+                        'Tipos de Trabajo': 'Demostrar dominio técnico, innovación y convencer al cliente indeciso.',
+                        'Experiencia': 'Vender el beneficio emocional y la relajación de visitar el salón.',
+                        'Humor': 'Aumentar alcance orgánico, compartir masivo y humanizar la marca.',
+                        'Transformación': 'Provocar alto impacto visual (Efecto WOW) y disparar consultas directas.',
+                        'Maquillaje': 'Captar eventos de fin de semana, novias y graduaciones.',
+                        'Testimonio': 'Generar prueba social irrefutable y construir confianza inmediata.',
+                        'Promocional': 'Incentivar la reserva inmediata de citas y llenar agenda semanal.',
+                        'Educativo': 'Posicionar al equipo como autoridad y justificar el valor premium.',
+                        'ASMR': 'Engagement sensorial y tendencia de alta retención de retención visual.'
+                    };
+                    return objectives[category] || 'Aumentar interacción y atracción de nuevos clientes.';
+                },
+                resetFilters() {
+                    this.selectedBlock = 0;
+                    this.selectedCategory = '';
+                    this.selectedStatus = '';
+                    this.searchQuery = '';
+                },
+                saveToLocalStorage() {
+                    localStorage.setItem('different_beauty_activities', JSON.stringify(this.activities));
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

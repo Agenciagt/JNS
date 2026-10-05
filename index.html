@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNS Agencia Marketing | Estrategia & Community Manager Guatemala</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 Icons (Cero Emojis) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#E50914',
+                            redGlow: '#FF2E38',
+                            redDark: '#8B0000',
+                            bg: '#050507',
+                            card: '#0C0C10',
+                            cardBorder: 'rgba(255, 255, 255, 0.08)',
+                            cardHover: 'rgba(229, 9, 20, 0.35)',
+                            grayText: '#9CA3AF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2.5s ease-in-out infinite alternate',
+                        'float': 'float 5s ease-in-out infinite',
+                        'bounce-subtle': 'bounce-subtle 2s infinite'
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(229, 9, 20, 0.25)' },
+                            '100%': { boxShadow: '0 0 45px rgba(229, 9, 20, 0.65)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        },
+                        'bounce-subtle': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-3px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #050507;
+            color: #F4F4F5;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, .font-heading {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 20%, #FF2E38 70%, #E50914 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-red-btn {
+            background: linear-gradient(135deg, #E50914 0%, #B80710 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gradient-red-btn:hover {
+            background: linear-gradient(135deg, #FF1E27 0%, #D00008 100%);
+            box-shadow: 0 10px 25px -5px rgba(229, 9, 20, 0.5);
+            transform: translateY(-2px);
+        }
+        .glass-card {
+            background: rgba(12, 12, 16, 0.88);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card-hover {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(229, 9, 20, 0.6);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -15px rgba(229, 9, 20, 0.35);
+        }
+        .bg-grid-pattern {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        }
+        
+        /* Efecto de aparición al hacer scroll */
+        .reveal-hidden {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Barra de scroll personalizada */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #27272A; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E50914; }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-red selection:text-white bg-grid-pattern">
+
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-card border-b border-brand-cardBorder/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGOTIPO -->
+            <a href="#inicio" class="flex items-center gap-3 group">
+                <img src="logo.png" alt="JNS Agencia Marketing Logo" class="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+                     onerror="this.onerror=null; this.outerHTML='<div class=\'flex items-center font-black text-2xl tracking-tighter\'><span class=\'text-brand-red text-3xl italic mr-1 font-heading\'>JNS</span><div class=\'flex flex-col border-l-2 border-brand-red pl-2 ml-1\'><span class=\'text-white text-xs font-bold tracking-widest uppercase font-heading\'>AGENCIA MARKETING</span><span class=\'text-[9px] text-gray-400 font-sans tracking-tight\'>COMUNIDAD • VENTAS</span></div></div>';">
+            </a>
+
+            <!-- MENÚ ESCRITORIO -->
+            <nav class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest uppercase">
+                <a href="#inicio" class="text-white hover:text-brand-red transition-colors">INICIO</a>
+                <a href="#plan" class="text-white hover:text-brand-red transition-colors flex items-center gap-1.5"><i class="fa-solid fa-star text-brand-red"></i> PLAN Q2,000</a>
+                <a href="#herramientas" class="text-white hover:text-brand-red transition-colors">EQUIPO</a>
+                <a href="#posts-virales" class="text-white hover:text-brand-red transition-colors">TRABAJOS</a>
+                <a href="#proceso" class="text-white hover:text-brand-red transition-colors">PROCESO</a>
+                <a href="#contacto" class="text-brand-red hover:text-white transition-colors flex items-center gap-1.5 font-extrabold">
+                    <i class="fa-solid fa-paper-plane"></i> CONTACTAR
+                </a>
+            </nav>
+
+            <!-- BOTÓN ACCIÓN ESCRITORIO -->
+            <div class="hidden sm:flex items-center gap-4">
+                <a href="#contacto" class="gradient-red-btn text-white text-xs font-black uppercase tracking-wider px-6 py-3 rounded-xl shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Solicitar Asesoría</span>
+                </a>
+            </div>
+
+            <!-- BOTÓN MENÚ MÓVIL -->
+            <button id="mobileMenuBtn" class="lg:hidden text-white text-2xl focus:outline-none p-2 rounded-xl bg-white/5 border border-white/10" aria-label="Abrir Menú">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+
+        <!-- MENÚ DESPLEGABLE MÓVIL -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-brand-bg/95 border-b border-brand-cardBorder px-6 py-6 space-y-4 font-semibold text-sm backdrop-blur-xl">
+            <a href="#inicio" class="flex items-center gap-2 hover:text-brand-red transition-colors py-2 border-b border-white/5"><i class="fa-solid fa-house w-5"></i> Inicio</a>
+            <a href="#plan" class="flex items-center gap-2 text-brand-red font-bold py-2 border-b border-white/5"><i class="fa-solid fa-star w-5"></i> Plan Marketing (Q2,000)</a>
+            <a href="#herramientas" class="flex items-center gap-2 hover:text-brand-red transition-colors py-2 border-b border-white/5"><i class="fa-solid fa-camera w-5"></i> Equipo & Herramientas</a>
+            <a href="#posts-virales" class="flex items-center gap-2 hover:text-brand-red transition-colors py-2 border-b border-white/5"><i class="fa-solid fa-images w-5"></i> Trabajos Realizados</a>
+            <a href="#proceso" class="flex items-center gap-2 hover:text-brand-red transition-colors py-2 border-b border-white/5"><i class="fa-solid fa-diagram-project w-5"></i> Metodología</a>
+            <a href="#contacto" class="gradient-red-btn text-white font-bold text-center py-3 rounded-xl block shadow-lg mt-4 uppercase text-xs tracking-wider">
+                <i class="fa-solid fa-paper-plane mr-2"></i> Formulario de Contacto
+            </a>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative pt-36 pb-24 md:pt-48 md:pb-36 overflow-hidden min-h-screen flex items-center">
+        <!-- Luces de fondo -->
+        <div class="absolute top-1/4 -left-32 w-[550px] h-[550px] bg-brand-red/15 rounded-full blur-[150px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-0 w-[550px] h-[550px] bg-red-900/10 rounded-full blur-[160px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Columna Izquierda (Textos y Promesa) -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-brand-red/40 text-xs font-semibold text-gray-300">
+                        <span class="w-2.5 h-2.5 rounded-full bg-brand-red animate-ping"></span>
+                        <span class="text-white font-extrabold uppercase tracking-wider text-[10px] sm:text-xs">Agencia de Marketing & Community Manager</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] uppercase font-heading">
+                        Gestionamos Tus Redes Para Que <span class="gradient-text">Vendas Más</span>
+                    </h1>
+
+                    <!-- CATCHPHRASE VENDEDORA -->
+                    <div class="glass-card bg-brand-red/10 border-brand-red/40 p-4 sm:p-5 rounded-2xl inline-block shadow-[0_0_25px_rgba(229,9,20,0.15)] mx-auto lg:mx-0">
+                        <p class="text-white font-black text-sm sm:text-base flex items-center text-left gap-3 leading-tight">
+                            <i class="fa-solid fa-mug-hot text-brand-red text-2xl sm:text-3xl shrink-0"></i>
+                            <span>¡Tú ya no haces nada, solo te encargas de recibir a los clientes!</span>
+                        </p>
+                    </div>
+
+                    <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                        Delegar tu presencia digital es fácil. En <strong class="text-white font-semibold">JNS Agencia</strong> nosotros vamos a tu local, grabamos con cámaras pro, editamos los videos y aplicamos estrategias comerciales directas a tu WhatsApp.
+                    </p>
+
+                    <!-- Botones de Acción -->
+                    <div class="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#contacto" class="w-full sm:w-auto gradient-red-btn text-white text-sm font-black uppercase tracking-wider px-8 py-4 rounded-xl shadow-xl flex items-center justify-center gap-3 group">
+                            <span>Quiero Vender Más</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
+                        </a>
+                        <a href="#plan" class="w-full sm:w-auto glass-card border border-brand-cardBorder hover:border-brand-red/60 text-white text-sm font-semibold px-6 py-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-list-check text-brand-red"></i>
+                            <span>Ver Plan de Q2,000</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha (Muestra visual) -->
+                <div class="lg:col-span-5 relative hidden md:block">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-red to-red-950 rounded-3xl blur-2xl opacity-50 animate-pulse-slow"></div>
+
+                        <div class="relative glass-card rounded-3xl p-6 sm:p-8 border border-brand-cardBorder space-y-6 shadow-2xl">
+                            
+                            <!-- Cabecera Tarjeta -->
+                            <div class="flex items-center justify-between border-b border-brand-cardBorder pb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-14 h-14 rounded-2xl bg-black border border-brand-cardBorder flex items-center justify-center p-2 overflow-hidden">
+                                        <img src="logo.png" alt="Logo JNS" class="w-full h-full object-contain"
+                                             onerror="this.onerror=null; this.outerHTML='<span class=\'text-brand-red font-black text-xl italic font-heading\'>JNS</span>';">
+                                    </div>
+                                    <div>
+                                        <h3 class="font-extrabold text-white text-sm leading-tight font-heading">JNS ESTRATEGIA</h3>
+                                        <p class="text-[11px] text-brand-grayText">Agencia & Community Manager</p>
+                                    </div>
+                                </div>
+                                <span class="bg-brand-red text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider animate-pulse">ACTIVO</span>
+                            </div>
+
+                            <!-- Imagen de muestra -->
+                            <div class="relative rounded-2xl overflow-hidden bg-black aspect-square border border-brand-cardBorder group cursor-pointer" onclick="openLightbox('publi.png', 'Estrategia Visual', 'Diseño publicitario diseñado para conversiones.')">
+                                <img src="publi.png" alt="Muestra Publicidad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                     onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-6 text-center bg-black/80 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-2xl\'><i class=\'fa-solid fa-image text-3xl text-brand-red mb-2\'></i><span>publi.png</span><span class=\'text-[10px] text-gray-500 mt-1\'>Muestra Visual</span></div>';">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+                                
+                                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-white">
+                                    <span class="bg-brand-red/80 backdrop-blur-sm border border-brand-red text-white font-bold px-3 py-1 rounded-lg text-[10px] uppercase tracking-wider flex items-center gap-1.5">
+                                        <i class="fa-solid fa-bullseye"></i> Alta Conversión
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="plan" class="py-24 relative bg-brand-card/40 border-y border-brand-cardBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <span class="inline-flex items-center gap-2 text-brand-red font-bold text-xs uppercase tracking-widest bg-brand-red/10 px-4 py-1.5 rounded-full border border-brand-red/30 mb-4">
+                    <i class="fa-solid fa-star"></i> Paquete Integral
+                </span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase font-heading tracking-tight mb-4">
+                    Plan Digital & Marketing
+                </h2>
+                <div class="flex items-center justify-center gap-2 mb-6">
+                    <span class="text-5xl lg:text-6xl font-black text-brand-red font-heading tracking-tighter">Q2,000</span>
+                    <span class="text-sm font-bold text-gray-400 mt-4 uppercase tracking-widest">/ Mensuales</span>
+                </div>
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                    Un solo plan integral para producir contenido, administrar tu presencia digital y trabajar una estrategia 100% enfocada en hacer crecer tu marca y generar ventas.
+                </p>
+            </div>
+
+            <!-- Grid de Características del Plan (6 Módulos) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+                
+                <!-- 1. Producción -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-cardBorder hover:border-brand-red/40 transition-colors">
+                    <div class="w-12 h-12 bg-brand-red/10 rounded-xl flex items-center justify-center text-brand-red mb-5 border border-brand-red/20">
+                        <i class="fa-solid fa-video text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-white uppercase font-heading tracking-wide mb-4">Producción de Contenido</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>1 video diario para redes sociales.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Publicación adaptada para TikTok e Instagram.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>1 jornada semanal de grabación (iniciando lunes) en el local.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Grabación con cámaras profesionales.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Uso de DJI Osmo Pocket y micrófonos pro.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Dron para tomas aéreas (cuando se requiera).</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Edición profesional audiovisual y gráfica.</span></li>
+                    </ul>
+                </div>
+
+                <!-- 2. Redes Sociales -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-cardBorder hover:border-brand-red/40 transition-colors">
+                    <div class="w-12 h-12 bg-brand-red/10 rounded-xl flex items-center justify-center text-brand-red mb-5 border border-brand-red/20">
+                        <i class="fa-solid fa-hashtag text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-white uppercase font-heading tracking-wide mb-4">Redes Sociales</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Creación de contenido nativo para Instagram y TikTok.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Diseño y redacción de posts atractivos.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Contenido semanal diseñado para Historias de Instagram.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Desarrollo de conceptos para mantener redes sumamente activas.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Orientación sobre tendencias y audios virales.</span></li>
+                    </ul>
+                </div>
+
+                <!-- 3. Estrategia & Community -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-cardBorder hover:border-brand-red/40 transition-colors">
+                    <div class="w-12 h-12 bg-brand-red/10 rounded-xl flex items-center justify-center text-brand-red mb-5 border border-brand-red/20">
+                        <i class="fa-solid fa-chess-knight text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-white uppercase font-heading tracking-wide mb-4">Estrategia & Community</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Asesoramiento para mejorar la estrategia de ventas online.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Ideas enfocadas en atraer clientes e incentivar compras.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Asesoría de promoción de productos y servicios clave.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Acompañamiento continuo para el manejo de redes.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Revisión de oportunidades de mejora en comunicación.</span></li>
+                    </ul>
+                </div>
+
+                <!-- 4. WhatsApp & Conversión -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-cardBorder hover:border-brand-red/40 transition-colors">
+                    <div class="w-12 h-12 bg-brand-red/10 rounded-xl flex items-center justify-center text-brand-red mb-5 border border-brand-red/20">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-white uppercase font-heading tracking-wide mb-4">WhatsApp & Conversión</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Optimización de links de contacto en perfiles sociales.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Creación de enlaces directos (wa.me) hacia WhatsApp.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Configuración y redacción de mensajes automáticos.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Optimización del flujo: Ver contenido → Contactar → Comprar.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Asesoramiento sobre seguimiento de clientes potenciales.</span></li>
+                    </ul>
+                </div>
+
+                <!-- 5. BTL & Activaciones -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-cardBorder hover:border-brand-red/40 transition-colors">
+                    <div class="w-12 h-12 bg-brand-red/10 rounded-xl flex items-center justify-center text-brand-red mb-5 border border-brand-red/20">
+                        <i class="fa-solid fa-bullhorn text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-white uppercase font-heading tracking-wide mb-4">BTL & Activaciones</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Propuestas de estrategias BTL en sitio para tu local.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Ideas creativas para activaciones y dinámicas promocionales.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Creación de contenido especial durante estas actividades.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Cobertura audiovisual exhaustiva del evento promocional.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-check text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Estrategias para conectar físicamente con los clientes.</span></li>
+                    </ul>
+                </div>
+
+                <!-- 6. Equipo Profesional -->
+                <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-cardBorder hover:border-brand-red/40 transition-colors">
+                    <div class="w-12 h-12 bg-brand-red/10 rounded-xl flex items-center justify-center text-brand-red mb-5 border border-brand-red/20">
+                        <i class="fa-solid fa-toolbox text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-black text-white uppercase font-heading tracking-wide mb-4">Equipo Profesional Incluido</h3>
+                    <p class="text-xs text-gray-400 mb-4">Acceso a producción realizada con nuestro arsenal técnico de alta gama:</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-chevron-right text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Cámaras Profesionales y Lentes.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-chevron-right text-brand-red mt-1 text-[10px] shrink-0"></i> <span>DJI Osmo Pocket (Estabilización 4K).</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-chevron-right text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Micrófonos Inalámbricos con cancelación de ruido.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-chevron-right text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Drones Aéreos e Iluminación LED.</span></li>
+                        <li class="flex items-start gap-3 text-sm text-gray-300"><i class="fa-solid fa-chevron-right text-brand-red mt-1 text-[10px] shrink-0"></i> <span>Software Profesional de Edición de Video & Fotografía.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gran Frase de Cierre -->
+            <div class="max-w-4xl mx-auto text-center relative mt-10">
+                <div class="glass-card bg-brand-red/5 border-brand-red/20 p-8 sm:p-12 rounded-3xl border relative overflow-hidden">
+                    <i class="fa-solid fa-quote-left absolute -top-4 -left-2 text-6xl text-brand-red/10"></i>
+                    <i class="fa-solid fa-quote-right absolute -bottom-4 -right-2 text-6xl text-brand-red/10"></i>
+                    
+                    <blockquote class="text-2xl sm:text-3xl lg:text-4xl font-black text-white font-heading leading-tight tracking-tight relative z-10">
+                        "No se trata solamente de publicar contenido. Se trata de crear contenido con una <span class="text-brand-red border-b-4 border-brand-red pb-1">estrategia detrás</span>."
+                    </blockquote>
+                    
+                    <div class="mt-10 flex justify-center">
+                        <a href="#contacto" class="gradient-red-btn text-white text-sm font-black uppercase tracking-wider px-10 py-5 rounded-xl shadow-[0_10px_30px_rgba(229,9,20,0.4)] flex items-center justify-center gap-3 hover:scale-105 transition-transform duration-300">
+                            <i class="fa-solid fa-check"></i>
+                            <span>Aceptar Plan Q2,000 Mensuales</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="herramientas" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-brand-red font-bold text-xs uppercase tracking-widest block"><i class="fa-solid fa-layer-group mr-1"></i> Nuestro Arsenal de Producción</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white uppercase font-heading">
+                    Equipo & Herramientas Profesionales
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base">
+                    Contamos con el equipamiento físico y software especializado para lograr rodajes impecables que reflejen la calidad de tu marca.
+                </p>
+            </div>
+
+            <!-- Grid de Equipos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Herramienta 1 -->
+                <div class="glass-card rounded-2xl p-5 glass-card-hover border border-brand-cardBorder flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden rounded-xl aspect-video bg-black mb-4 border border-brand-cardBorder cursor-pointer" onclick="openLightbox('1os.png', 'DJI Osmo Pocket', 'Estabilización mecánica de 3 ejes.')">
+                            <img src="1os.png" alt="DJI Osmo Pocket" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-4 bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-camera-rotate text-2xl text-brand-red mb-1\'></i><span>1os.png</span></div>';">
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1.5 font-heading">DJI Osmo Pocket</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Estabilización gimbal mecánica de 3 ejes para movimientos ultrasuaves y tomas cinemáticas en tu local.</p>
+                    </div>
+                </div>
+
+                <!-- Herramienta 2 -->
+                <div class="glass-card rounded-2xl p-5 glass-card-hover border border-brand-cardBorder flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden rounded-xl aspect-video bg-black mb-4 border border-brand-cardBorder cursor-pointer" onclick="openLightbox('2os.png', 'Micrófonos Profesionales', 'Sistemas inalámbricos de solapa.')">
+                            <img src="2os.png" alt="Micrófonos Profesionales" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-4 bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-microphone-lines text-2xl text-brand-red mb-1\'></i><span>2os.png</span></div>';">
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1.5 font-heading">Micrófonos Profesionales</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Micrófonos solaperos inalámbricos con filtros de viento y supresión de ruido externo para audios cristalinos.</p>
+                    </div>
+                </div>
+
+                <!-- Herramienta 3 -->
+                <div class="glass-card rounded-2xl p-5 glass-card-hover border border-brand-cardBorder flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden rounded-xl aspect-video bg-black mb-4 border border-brand-cardBorder cursor-pointer" onclick="openLightbox('3os.png', 'Iluminación LED Pro', 'Paneles de luz suave.')">
+                            <img src="3os.png" alt="Iluminación LED" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-4 bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-lightbulb text-2xl text-brand-red mb-1\'></i><span>3os.png</span></div>';">
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1.5 font-heading">Iluminación LED</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Paneles Softbox e iluminación puntual para eliminar sombras indeseadas y realzar el producto.</p>
+                    </div>
+                </div>
+
+                <!-- Herramienta 4 -->
+                <div class="glass-card rounded-2xl p-5 glass-card-hover border border-brand-cardBorder flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden rounded-xl aspect-video bg-black mb-4 border border-brand-cardBorder cursor-pointer" onclick="openLightbox('4os.png', 'Drones para Videos 4K', 'Tomas aéreas panorámicas.')">
+                            <img src="4os.png" alt="Drones 4K" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-4 bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-drone text-2xl text-brand-red mb-1\'></i><span>4os.png</span></div>';">
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1.5 font-heading">Drones 4K</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Grabación aérea de alta precisión para mostrar la infraestructura o ubicación estratégica de tu negocio.</p>
+                    </div>
+                </div>
+
+                <!-- Herramienta 5 -->
+                <div class="glass-card rounded-2xl p-5 glass-card-hover border border-brand-cardBorder flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden rounded-xl aspect-video bg-black mb-4 border border-brand-cardBorder cursor-pointer" onclick="openLightbox('5os.png', 'Programas de Edición', 'Software especializado.')">
+                            <img src="5os.png" alt="Programas de Edición" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-4 bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-laptop-code text-2xl text-brand-red mb-1\'></i><span>5os.png</span></div>';">
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1.5 font-heading">Software Profesional</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Suite de software para edición de video, corrección de color cinemática y diseño gráfico creativo.</p>
+                    </div>
+                </div>
+
+                <!-- Herramienta 6 -->
+                <div class="glass-card rounded-2xl p-5 glass-card-hover border border-brand-cardBorder flex flex-col justify-between group">
+                    <div>
+                        <div class="relative overflow-hidden rounded-xl aspect-video bg-black mb-4 border border-brand-cardBorder cursor-pointer" onclick="openLightbox('6os.png', 'Teléfonos Alta Gama', 'Captura móvil vertical.')">
+                            <img src="6os.png" alt="Teléfonos Alta Gama" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                 onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-4 bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-mobile-screen-button text-2xl text-brand-red mb-1\'></i><span>6os.png</span></div>';">
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-1.5 font-heading">Móviles Alta Gama</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Equipos configurados en 60fps vertical para procesamiento ultra rápido de tendencias y algoritmos.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section id="posts-virales" class="py-24 bg-brand-card/30 border-y border-brand-cardBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
+                <span class="text-brand-red font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-fire mr-1"></i> Resultados Reales</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white uppercase font-heading">
+                    Nuestros Posts Más Virales
+                </h2>
+                <p class="text-gray-400 text-sm">
+                    Muestras visuales de contenidos publicitarios diseñados puramente para generar alcance, interacción y conversiones.
+                </p>
+            </div>
+
+            <!-- Galería de 3 imágenes -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="glass-card rounded-2xl p-4 border border-brand-cardBorder group hover:border-brand-red/60 transition-all cursor-pointer" onclick="openLightbox('publi.png', 'Post Viral', 'Diseño publicitario enfocado en captación.')">
+                    <div class="relative overflow-hidden rounded-xl aspect-square bg-black border border-brand-cardBorder">
+                        <img src="publi.png" alt="Post Viral publi.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-6 text-center bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-image text-3xl text-brand-red mb-2\'></i><span>publi.png</span></div>';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded w-max uppercase tracking-wider mb-2">Captación</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-4 border border-brand-cardBorder group hover:border-brand-red/60 transition-all cursor-pointer" onclick="openLightbox('publi2.png', 'Post Estratégico', 'Diseño de alto impacto comercial.')">
+                    <div class="relative overflow-hidden rounded-xl aspect-square bg-black border border-brand-cardBorder">
+                        <img src="publi2.png" alt="Post Viral publi2.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-6 text-center bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-image text-3xl text-brand-red mb-2\'></i><span>publi2.png</span></div>';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded w-max uppercase tracking-wider mb-2">Ventas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl p-4 border border-brand-cardBorder group hover:border-brand-red/60 transition-all cursor-pointer" onclick="openLightbox('publi3.png', 'Arte de Contenido', 'Enfocado en conversiones.')">
+                    <div class="relative overflow-hidden rounded-xl aspect-square bg-black border border-brand-cardBorder">
+                        <img src="publi3.png" alt="Post Viral publi3.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             onerror="this.onerror=null; this.outerHTML='<div class=\'w-full h-full flex flex-col items-center justify-center p-6 text-center bg-black/90 text-gray-400 text-xs font-mono border border-dashed border-brand-red/40 rounded-xl\'><i class=\'fa-solid fa-image text-3xl text-brand-red mb-2\'></i><span>publi3.png</span></div>';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+                            <span class="bg-brand-red text-white text-[10px] font-bold px-2.5 py-1 rounded w-max uppercase tracking-wider mb-2">Engagement</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="proceso" class="py-20 border-b border-brand-cardBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-2">
+                <span class="text-brand-red font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-diagram-project mr-1"></i> Metodología</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-white uppercase font-heading">
+                    ¿Cómo Trabajamos?
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="glass-card p-6 rounded-2xl border border-brand-cardBorder text-center sm:text-left">
+                    <div class="text-4xl font-black text-brand-red/30 font-heading mb-3"><i class="fa-solid fa-1"></i></div>
+                    <h3 class="font-extrabold text-white text-base mb-2 font-heading">Estrategia</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Analizamos tu negocio y definimos los guiones de grabación del mes enfocados en conversiones.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-brand-cardBorder text-center sm:text-left">
+                    <div class="text-4xl font-black text-brand-red/30 font-heading mb-3"><i class="fa-solid fa-2"></i></div>
+                    <h3 class="font-extrabold text-white text-base mb-2 font-heading">Rodaje</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Asistimos a tu local con nuestras cámaras, luces y micrófonos para capturar el material.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-brand-cardBorder text-center sm:text-left">
+                    <div class="text-4xl font-black text-brand-red/30 font-heading mb-3"><i class="fa-solid fa-3"></i></div>
+                    <h3 class="font-extrabold text-white text-base mb-2 font-heading">Edición</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Procesamos el material para lograr videos fluidos, atractivos y retocados gráficamente.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-brand-cardBorder text-center sm:text-left">
+                    <div class="text-4xl font-black text-brand-red/30 font-heading mb-3"><i class="fa-solid fa-4"></i></div>
+                    <h3 class="font-extrabold text-white text-base mb-2 font-heading">Publicación</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed">Distribuimos las piezas en redes sociales para captar clientes hacia tu WhatsApp.</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECCIÓN CRONOGRAMA DE TRABAJO (Referencia Visual al Enlace) -->
+    <section id="cronograma" class="py-24 relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-[400px] bg-brand-red/10 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-card p-8 sm:p-14 rounded-3xl border border-brand-red/40 bg-gradient-to-b from-brand-card/95 to-black shadow-[0_0_50px_rgba(229,9,20,0.15)] text-center relative overflow-hidden">
+                
+                <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+
+                <div class="w-16 h-16 mx-auto bg-brand-red/10 rounded-2xl border border-brand-red/30 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(229,9,20,0.3)] relative z-10">
+                    <i class="fa-solid fa-calendar-days text-brand-red text-3xl animate-bounce-subtle"></i>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white uppercase font-heading mb-4 tracking-tight relative z-10">
+                    La Planificación es la <span class="gradient-text">Clave</span>
+                </h2>
+                
+                <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-10 relative z-10">
+                    No improvisamos. Mira un ejemplo exacto de cómo estructuramos el calendario de publicaciones y días de rodaje para asegurar que tu marca nunca se quede sin contenido comercial.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-5 relative z-10">
+                    <a href="salon.html" class="w-full sm:w-auto gradient-red-btn text-white text-sm font-black uppercase tracking-wider px-10 py-5 rounded-xl shadow-[0_10px_30px_rgba(229,9,20,0.4)] flex items-center justify-center gap-3 hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid fa-table-list text-lg"></i>
+                        <span>Ver Ejemplo de Cronograma Real</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="py-24 bg-brand-card/60 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-8 sm:p-12 rounded-3xl border border-brand-cardBorder shadow-2xl relative">
+                
+                <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
+                    <span class="text-brand-red font-bold text-xs uppercase tracking-widest bg-brand-red/10 px-3.5 py-1 rounded-full border border-brand-red/30">
+                        <i class="fa-solid fa-envelope mr-1"></i> Contacto Directo
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white uppercase font-heading">
+                        Solicita Tu Plan Q2,000
+                    </h2>
+                    <p class="text-gray-400 text-xs sm:text-sm">
+                        Déjanos tus datos. Evaluaremos tu negocio y te contactaremos para agendar nuestra primera visita de grabación.
+                    </p>
+                </div>
+
+                <form action="https://formspree.io/f/mwlpzjlg" method="POST" class="space-y-6 max-w-2xl mx-auto">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Empresa / Contacto <span class="text-brand-red">*</span></label>
+                            <input type="text" id="name" name="nombre_empresa" required placeholder="Ej. Restaurante El Gourmet" class="w-full bg-brand-bg border border-brand-cardBorder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Teléfono / WhatsApp <span class="text-brand-red">*</span></label>
+                            <input type="tel" id="phone" name="telefono" required placeholder="Ej. 5555-1234" class="w-full bg-brand-bg border border-brand-cardBorder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Correo Electrónico <span class="text-brand-red">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="empresa@correo.com" class="w-full bg-brand-bg border border-brand-cardBorder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors">
+                        </div>
+                        <div>
+                            <label for="category" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Giro de Negocio <span class="text-brand-red">*</span></label>
+                            <input type="text" id="category" name="tipo_negocio" required placeholder="Ej. Tienda Ropa, Clínica..." class="w-full bg-brand-bg border border-brand-cardBorder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="address" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Ubicación del Negocio <span class="text-brand-red">*</span></label>
+                        <input type="text" id="address" name="direccion_ubicacion" required placeholder="Ej. Zona 10, Ciudad de Guatemala" class="w-full bg-brand-bg border border-brand-cardBorder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors">
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Detalles Adicionales</label>
+                        <textarea id="message" name="mensaje" rows="4" placeholder="¿Cuáles son tus objetivos comerciales principales?" class="w-full bg-brand-bg border border-brand-cardBorder rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-red transition-colors"></textarea>
+                    </div>
+
+                    <input type="hidden" name="plan_solicitado" value="Plan Integral Q2,000/mes">
+
+                    <button type="submit" class="w-full gradient-red-btn text-white text-sm font-black uppercase tracking-wider py-4 rounded-xl shadow-xl flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Enviar Solicitud de Información</span>
+                    </button>
+
+                    <p class="text-[11px] text-gray-500 text-center">Tus datos son procesados de forma confidencial por JNS Agencia.</p>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="pt-20 pb-12 bg-brand-bg border-t border-brand-cardBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 border-b border-brand-cardBorder pb-16">
+                
+                <div class="md:col-span-6 space-y-4 text-center sm:text-left">
+                    <a href="#inicio" class="inline-block">
+                        <img src="logo.png" alt="JNS Agencia Logo" class="h-12 w-auto mx-auto sm:mx-0 object-contain" 
+                             onerror="this.onerror=null; this.outerHTML='<div class=\'flex items-center justify-center sm:justify-start font-black text-2xl tracking-tighter\'><span class=\'text-brand-red text-3xl italic mr-1 font-heading\'>JNS</span><span class=\'text-white text-xs font-bold uppercase tracking-widest border-l-2 border-brand-red pl-2 ml-1 font-heading\'>Agencia Marketing</span></div>';">
+                    </a>
+                    <p class="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-md mx-auto sm:mx-0">
+                        Agencia de publicidad especializada. Producción audiovisual, estrategia de ventas y Community Manager para empresas. Tú no haces nada, nosotros atraemos a los clientes.
+                    </p>
+                </div>
+
+                <div class="md:col-span-6 space-y-3 text-xs text-center md:text-right">
+                    <h4 class="font-extrabold text-white uppercase tracking-wider text-sm font-heading">Navegación</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#plan" class="hover:text-brand-red transition-colors">El Plan de Q2,000</a></li>
+                        <li><a href="salon.html" class="hover:text-brand-red transition-colors">Cronograma de Trabajo</a></li>
+                        <li><a href="#herramientas" class="hover:text-brand-red transition-colors">Equipos de Grabación</a></li>
+                        <li><a href="#contacto" class="hover:text-brand-red transition-colors">Solicitar Asesoría</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>&copy; <span id="year"></span> JNS Agencia Marketing.</p>
+                <p class="flex items-center gap-1.5 text-gray-400 font-bold uppercase tracking-widest">
+                    <i class="fa-solid fa-bolt text-brand-red"></i> Aumentando Ventas
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="fixed inset-0 z-[70] bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full glass-card rounded-3xl overflow-hidden border border-brand-cardBorder p-4 sm:p-6 space-y-4">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl hover:text-brand-red transition-colors w-10 h-10 rounded-full bg-black/60 flex items-center justify-center z-10 border border-white/10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="max-h-[70vh] overflow-hidden rounded-2xl bg-black flex items-center justify-center border border-brand-cardBorder">
+                <img id="lightboxImg" src="" alt="Vista previa" class="max-h-[65vh] w-auto object-contain">
+            </div>
+            <div class="pt-2 text-center sm:text-left">
+                <h3 id="lightboxTitle" class="text-xl font-extrabold text-white font-heading"></h3>
+                <p id="lightboxDesc" class="text-xs text-gray-300 mt-1"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Actualizar el año del footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Control del menú en dispositivos móviles
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                menuIcon.className = 'fa-solid fa-bars';
+            } else {
+                menuIcon.className = 'fa-solid fa-xmark';
+            }
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.className = 'fa-solid fa-bars';
+            });
+        });
+
+        // Funciones del Modal de Imágenes (Lightbox)
+        function openLightbox(imgSrc, title, desc) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            const titleEl = document.getElementById('lightboxTitle');
+            const descEl = document.getElementById('lightboxDesc');
+
+            img.src = imgSrc;
+            titleEl.textContent = title;
+            descEl.textContent = desc;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Animación suave de aparición al scrollear (Intersection Observer)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 
+        };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const elementsToAnimate = document.querySelectorAll(`
+            section:not(#inicio) .glass-card, 
+            section:not(#inicio) h2, 
+            section:not(#inicio) blockquote, 
+            section:not(#inicio) .grid > div
+        `);
+        
+        elementsToAnimate.forEach((el, index) => {
+            el.classList.add('reveal-hidden');
+            
+            // Retraso en cascada para grids (hace que las tarjetas aparezcan una por una)
+            if(el.parentElement.classList.contains('grid')) {
+                const delay = (index % 6) * 150; 
+                el.style.transitionDelay = `${delay}ms`;
+            }
+            
+            scrollObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
